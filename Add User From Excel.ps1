@@ -8,8 +8,6 @@ $Password = $Credentials.Password
 $Server = "wasko.pl"
 $Credentials = New-Object System.Management.Automation.PSCredential $Username,$Password
 
-
-
 function ADandMail {
 
 $SamAccountUser = ($Firstname[0] + '.' + $Lastname).ToLower()
@@ -23,6 +21,8 @@ $Mainpath = "OU=ente, DC=ente, DC=local"
 #=========================================================
 $Pass = "ChangePa`$`$w0rd"
 #=========================================================
+
+# Create User in Active Directory
 
   New-ADUser `
             -SamAccountName $SamAccountUser `
@@ -56,7 +56,8 @@ $Pass = "ChangePa`$`$w0rd"
     Write-Output "Hasło do zmiany: $Pass" | Out-File  D:\Skrypty\New_Users.txt -append
     Write-Output "" | Out-File  D:\Skrypty\New_Users.txt -append
 
-<#
+#Create Email Account - Smartermail 
+
 $Cred = Get-StoredCredential -Target mxente
 $password = $Cred.GetNetworkCredential().Password
 $username = $Cred.GetNetworkCredential().UserName
@@ -109,9 +110,7 @@ $user = @('{
 
 Invoke-RestMethod -uri https://mx.coig.pl/api/v1/settings/domain/user-put -Method Post -Headers $header -body $user -ContentType "application/json"
 
-#>
 }
-
 
 foreach ($line in $dane) {
 
