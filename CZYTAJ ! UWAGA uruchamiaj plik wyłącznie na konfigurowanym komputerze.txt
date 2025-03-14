@@ -1,0 +1,12 @@
+Zadania:
+- Konfiguracja usług sieciowych
+- Utworzenie użytkownika lokalnego Wasko z uprawnieniami administratora
+- Włączenie opcji pulpitu zdalnego
+- Wyłączenie Zapory Windows Defender
+- Restart
+
+
+PowerShell: Nadawanie uprawnień do plików i katalogów:
+
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
+Get-ExecutionPolicy -List
