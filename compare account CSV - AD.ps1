@@ -1,11 +1,10 @@
-$Credentials = Get-StoredCredential -Target 'wasko.pl'
+$Credentials = Get-StoredCredential -Target 'wasko'
 $Username = $Credentials.UserName
 $Password = $Credentials.Password
-$Server = "wasko.pl"
+$Server = "wasko"
 $GLOBAL:Credentials = New-Object System.Management.Automation.PSCredential ($Username, $Password)
 
-#$OU = "OU=FONON,OU=WSPOLPRACOWNICY,OU=WASKO,DC=wasko,DC=pl"
-$OU = "OU=WASKO,DC=wasko,DC=pl"
+$OU = "WASKO"
 
 $filter = '*'
 
@@ -26,7 +25,7 @@ $ADUsers = Get-ADUser -Filter $filter -SearchBase $OU -Properties Enabled, Displ
         Name = 'Mail'; Expression = { $_.Mail }
     }
 
-$Headers = @("SamAccountName", "Enabled")  # Zakładamy, że mamy tylko dwie kolumny: SamAccountName i Enabled
+$Headers = @("SamAccountName", "Enabled")  
 $CsvData = Import-Csv -Path "d:\fonon_email\mxcoig.csv" -Header $Headers
 
 $ComparisonResults = @()
