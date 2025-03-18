@@ -1,10 +1,10 @@
-$Credentials = Get-StoredCredential -Target 'wasko'
+$Credentials = Get-StoredCredential -Target 'wa'
 $Username = $Credentials.UserName
 $Password = $Credentials.Password
-$Server = "wasko"
+$Server = "wa"
 $GLOBAL:Credentials = New-Object System.Management.Automation.PSCredential ($Username, $Password)
 
-$OU = "WASKO"
+$OU = "WA"
 
 $filter = '*'
 
@@ -54,6 +54,6 @@ foreach ($CsvEntry in $CsvData) {
     }
 }
 
-$ComparisonResults | Export-Csv -Path "d:\fonon_email\Porownanie.csv" -NoTypeInformation
+$ComparisonResults | Export-Csv -Path "d:\fo\Po.csv" -NoTypeInformation
 
 $ComparisonResults | Where-Object { $_.MatchFound -eq $true } | Format-Table CsvSamAccountName, CsvEnabled, ADUserSamAccountName, ADUserDisplayName, ADUserEnabled -AutoSize
