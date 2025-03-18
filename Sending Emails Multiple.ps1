@@ -9,7 +9,7 @@
     )
 
     Process {
-        $Data = Get-Content -Path 'C:\Users\itmw\Documents\data1.txt'
+        $Data = Get-Content -Path 'C:\data.txt'
 
         foreach ($D in $Data) {
             $ComputerName = $($D.Split("|")[0])
@@ -29,16 +29,11 @@
             $Email.Subject = "Bitlocker na komputerze $ComputerName"
             $Email.Body = @"
 Cześć,
-
 Na Twoim komputerze $ComputerName jest wyłączony Bitlocker.
-
-Prosimy o informację zwrotną po włączeniu funkcji Bitlocker (wszystkie partycje).
-
+Prosimy o informację zwrotną po włączeniu funkcji Bitlocker.
 Komputer wymaga wpięcia do sieci firmowej.
-
 W razie pytań prosimy o kontakt.
-
-Administratorzy IT
+Administrator IT
 "@
 
             $Email.Attachments.Add("C:\bitlocker.png") | Out-Null
