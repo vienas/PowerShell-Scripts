@@ -82,7 +82,7 @@ function Get-SearchMailingList {
 
         try { $webRequest2 = Invoke-RestMethod -uri https://mx.coig.pl/api/v1/settings/domain/mailing-lists/subscribers/$mxAccount/$requestMailListId -Method Get -Headers $header -body $user -ContentType "application/json"
             }
-        catch { Write-Information "Brak użytkownika w Listach Mailigowych "}
+        catch { Write-Information "Brak użytkownika w LM "}
         
         $webRequest2Id = $webRequest2 | Select-Object -ExpandProperty subscribedLists
         $IncludeUserIdML = $webRequest2 | Select-Object -ExpandProperty subscribedLists
@@ -131,7 +131,7 @@ function Get-Final {
     
     Process {
 
-$Global:Data = Get-Content -Path 'C:\Users\itmw\Documents\disableMailwasko.txt'
+$Global:Data = Get-Content -Path 'C:\disabled.txt'
 
 $Header = @"
 <style>
@@ -144,49 +144,49 @@ TD {border-width: 1px; padding: 3px; border-style: solid; border-color: black;}
 
 foreach ($mxAccount in $Data) {
 
-#Write-Host "WASKO" -ForegroundColor DarkYellow
+Write-Host "WASKO" -ForegroundColor DarkYellow
 Set-CredentialMx -Target "mxwasko"
-#Get-SearchAliases -mxAccount $mxAccount -box "wasko"
+Get-SearchAliases -mxAccount $mxAccount -box "wasko"
 Get-SearchMailingList -mxAccount $mxAccount  -box "wasko"
 
-#Write-Host "FONON" -ForegroundColor DarkYellow
+Write-Host "FONON" -ForegroundColor DarkYellow
 Set-CredentialMx -Target "mxfonon"
-#Get-SearchAliases -mxAccount $mxAccount -box "fonon"
+Get-SearchAliases -mxAccount $mxAccount -box "fonon"
 Get-SearchMailingList -mxAccount $mxAccount -box "fonon"
 
-#Write-Host "ENTE" -ForegroundColor DarkYellow
-Set-CredentialMx -Target "mxente"
-#Get-SearchAliases -mxAccount $mxAccount -box "ente"
-Get-SearchMailingList -mxAccount $mxAccount -box "ente"
+Write-Host "EN..TE" -ForegroundColor DarkYellow
+Set-CredentialMx -Target "1"
+Get-SearchAliases -mxAccount $mxAccount -box "en..te"
+Get-SearchMailingList -mxAccount $mxAccount -box "en..te"
 
-#Write-Host "COIG" -ForegroundColor DarkYellow
-Set-CredentialMx -Target "mxcoig"
-#Get-SearchAliases -mxAccount $mxAccount -box "coig"
-Get-SearchMailingList -mxAccount $mxAccount  -box "coig"
+Write-Host "CO..IG" -ForegroundColor DarkYellow
+Set-CredentialMx -Target "1"
+Get-SearchAliases -mxAccount $mxAccount -box "co..ig"
+Get-SearchMailingList -mxAccount $mxAccount  -box "co..ig"
 
-#Write-Host "WASKO4B" -ForegroundColor DarkYellow
-Set-CredentialMx -Target "mxwasko4b"
-#Get-SearchAliases -mxAccount $mxAccount -box "w4b"
-Get-SearchMailingList -mxAccount $mxAccount -box "w4b"
+Write-Host "WAS..KO4B" -ForegroundColor DarkYellow
+Set-CredentialMx -Target "1"
+Get-SearchAliases -mxAccount $mxAccount -box "w..4b"
+Get-SearchMailingList -mxAccount $mxAccount -box "w..4b"
 
-#Write-Host "GABOS" -ForegroundColor DarkYellow
-Set-CredentialMx -Target "mxgabos"
-#Get-SearchAliases -mxAccount $mxAccount -box "gabos"
-Get-SearchMailingList -mxAccount $mxAccount -box "gabos"
+Write-Host "GAB..OS" -ForegroundColor DarkYellow
+Set-CredentialMx -Target "1"
+Get-SearchAliases -mxAccount $mxAccount -box "gab..os"
+Get-SearchMailingList -mxAccount $mxAccount -box "gab..os"
 
-#Write-Host "DE2ES" -ForegroundColor DarkYellow
-Set-CredentialMx -Target "mxde2es"
-#Get-SearchAliases -mxAccount $mxAccount -box "d2s"
-Get-SearchMailingList -mxAccount $mxAccount -box "d2s"
+Write-Host "DE2..ES" -ForegroundColor DarkYellow
+Set-CredentialMx -Target "1"
+Get-SearchAliases -mxAccount $mxAccount -box "d..2s"
+Get-SearchMailingList -mxAccount $mxAccount -box "d..2s"
 
   }
 }
 }
 
 
-#Get-Final | convertto-html -Head $Header -Property Adres_email, Alias, SmarterMailMX | Out-File -FilePath c:\Aliasy.html -Append
-Get-Final | convertto-html -Head $Header -Property Adres_email, Lista_mailingowa, SmarterMailMX -Title "List Mailingowa kont wylaczonych" -Body get-date | Out-File -FilePath c:\Listy_mailingowe.html -Append
+Get-Final | convertto-html -Head $Header -Property SmarterMail | Out-File -FilePath c:\Al.html -Append
+Get-Final | convertto-html -Head $Header -Property SmarterMail -Title "LM disab" -Body get-date | Out-File -FilePath c:\LM.html -Append
 
 
-#Export-Csv -Path 'C:\Users\itmw\Documents\MailAlias.csv' -InputObject * 
-#$Global:mxAccount = $(Write-Host "USUNĄĆ WSZYSKIE ALIASY ?" -ForegroundColor yellow -NoNewline -BackgroundColor red ; Read-Host)
+Export-Csv -Path 'C:\Users\itmw\Documents\MailAlias.csv' -InputObject * 
+$Global:mxAccount = $(Write-Host "remove ?" -ForegroundColor yellow -NoNewline -BackgroundColor red ; Read-Host)
