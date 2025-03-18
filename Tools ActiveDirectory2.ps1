@@ -3,20 +3,20 @@ Write-Host "1. OBIEKTY NIEZALOGOWANE DO DOMENY X DNI"
 Write-Host "2. ZNAJDŹ OBIEKTY BEZ MENADŻERA"
 Write-Host "3. ZNAJDŹ OBIEKTY UŻYTKOWNIKA"
 Write-Host "4. ZNAJDŹ OBIEKTY WYŁĄCZONE "
-Write-Host "5. L4 - WYSZUKAJ"
-Write-Host "6. SZUKAJ WYŁĄCZONYCH UŻYTKOWNIKÓW OU=WASKO I PRZENIEŚ DO OU=wylaczone konta"
+Write-Host "5. WYSZUKAJ"
+Write-Host "6. SZUKAJ WYŁĄCZONYCH UŻYTKOWNIKÓW"
 Write-Host "7. SZUKAJ UŻYTKOWNIKA PO TELEFONIE"
-Write-Host "8. SZUKAJ UŻYTKOWNIKA BEZ MANAGERA W DOMENIE ENTE"
-Write-Host "9. SZUKAJ UŻYTKOWNIKA BEZ MANAGERA W DOMENIE WASKO"
+Write-Host "8. SZUKAJ UŻYTKOWNIKA BEZ MANAGERA W DOMENIE EN..TE"
+Write-Host "9. SZUKAJ UŻYTKOWNIKA BEZ MANAGERA W DOMENIE WA..SKO"
 
 $case = $(Write-Host "Wybierz numer zadania: " -ForegroundColor Cyan -NoNewLine; Read-Host);
 
-$Credentials = Get-StoredCredential -Target wasko
+$Credentials = Get-StoredCredential -Target wa
 $Credentials_Ente = Get-StoredCredential -Target ente
 $Username = $Credentials.UserName
 $Password = $Credentials.Password
-$Server = "wasko"
-$Server_Ente = "ente"
+$Server = "wa"
+$Server_Ente = "en"
 $GLOBAL:Credentials = New-Object System.Management.Automation.PSCredential $Username,$Password
 
 switch ($case) {
@@ -36,7 +36,7 @@ switch ($case) {
     Write-Output ""
 
     Write-Host "Znaleziono obiektów: $countobject"
-    Write-Host -ForegroundColor Yellow "Obiekty zostały zapisane: C:\Lista_obiektów-$countobject.txt"
+    Write-Host -ForegroundColor Yellow "Obiekty zostały zapisane: C:\L.txt"
     Invoke-Item C:\Lista_obiektów-$countobject.txt
 
     $next1 = Read-Host "Czy przenieść obiekty do OU=wylaczone komputery ? Tak [Tak]"
@@ -106,15 +106,15 @@ switch ($case) {
     '5' {  
     cls
     do {
-    $Credentials = Get-StoredCredential -Target ente
+    $Credentials = Get-StoredCredential -Target en
     $Username = $Credentials.UserName
     $Password = $Credentials.Password
-    $Server = "ente.local"
+    $Server = "en"
 
-    $Credentials = Get-StoredCredential -Target fk
+    $Credentials = Get-StoredCredential -Target f
     $Username = $Credentials.UserName
     $Password = $Credentials.Password
-    $Server = "fk"
+    $Server = "f"
 
  (Get-ADUser -filter * -Properties SamAccountName, description, Company -Server 'wasko' | Where-Object description -like "*nieob*" | select Company, SamAccountName, description)
 ,(Get-ADUser -filter * -Properties SamAccountName, description, Company -Server 'ente' | Where-Object description -like "*nieob*" | select Company, SamAccountName, description)
@@ -128,7 +128,7 @@ switch ($case) {
      do {
             $disabledUsers = Get-ADUser -Filter { Enabled -eq $false } -Credential $Credentials -Server $Server -SearchBase "1" | Select-Object Name
 
-            $disabledUsers | Format-List Name |  Out-File C:\list_users_disabled.txt
+            $disabledUsers | Format-List Name |  Out-File C:\lis.txt
 
             Write-Output "Liczba znalezionych wyłączonych kont: $($disabledUsers.Count)"
 
@@ -203,4 +203,4 @@ switch ($case) {
 }
 
 }
-if ($back -eq "t") {C:\Tools_ActiveDirectory.ps1}
+if ($back -eq "t") {C:\Tools.ps1}
