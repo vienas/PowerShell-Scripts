@@ -5,7 +5,7 @@ New-Item -ItemType Directory -Path $destinationFolder -Force | Out-Null
 
 $lastRunFile = "C:\script\last_run.txt"
 
-$remotePath = "c$\ProgramData\ESET\RemoteAdministrator\Agent\EraAgentApplicationData\Logs\status.html"
+$remotePath = "c$\ProgramData\ESET\...\status.html"
 
 while ($true) {
     $connectionResults = @{} # 
