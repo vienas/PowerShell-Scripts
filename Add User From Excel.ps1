@@ -1,11 +1,11 @@
-﻿Remove-Item -Path "D:\Skrypty\New_Users.txt"
+﻿Remove-Item -Path "D:\new_users.txt"
 
-$dane = Import-excel D:\Skrypty\users.xlsx
+$dane = Import-excel D:\users.xlsx
 
-$Credentials = Get-StoredCredential -Target ente.local
+$Credentials = Get-StoredCredential -Target ente
 $Username = $Credentials.UserName
 $Password = $Credentials.Password
-$Server = "wasko.pl"
+$Server = "ente"
 $Credentials = New-Object System.Management.Automation.PSCredential $Username,$Password
 
 function ADandMail {
@@ -17,9 +17,9 @@ Foreach ($key in $hash.keys) {
     $SamAccountUser = $SamAccountUser.Replace($key, $hash.$key)
   }
 #=========================================================
-$Mainpath = "OU=ente, DC=ente, DC=local"
+$Mainpath = "ente"
 #=========================================================
-$Pass = "ChangePa`$`$w0rd"
+$Pass = "password"
 #=========================================================
 
 # Create User in Active Directory
@@ -37,24 +37,24 @@ $Pass = "ChangePa`$`$w0rd"
             -Department $Department `
             -Path "$mainpath" `
             -EmailAddress $SamAccountUser@wasko.pl `
-            -Title "Praktykant" `
+            -Title "User" `
             -Manager $Manager `
             -ChangePasswordAtLogon $true `
-            -StreetAddress "Berbeckiego 6" `
+            -StreetAddress "Adress" `
             -City "Gliwice" `
             -Company "WASKO S.A." `
             -Country "pl" `
             -PostalCode "44-100" `
-            -AccountExpirationDate "31-07-2023" `
+            -AccountExpirationDate "31-03-2022" `
             -Enabled $true `
             -AccountPassword (ConvertTo-SecureString $Pass -AsPlainText -Force)
 
 
-    Write-Output "Imię i Nazwisko: $Firstname $Lastname" | Out-File  D:\Skrypty\New_Users.txt -append
-    Write-Output "Użytkownik: DOMENA-WASKO\$SamAccountUser" | Out-File  D:\Skrypty\New_Users.txt -append
-    Write-Output "E-mail: $SamAccountUser@wasko.pl" | Out-File  D:\Skrypty\New_Users.txt -append
-    Write-Output "Hasło do zmiany: $Pass" | Out-File  D:\Skrypty\New_Users.txt -append
-    Write-Output "" | Out-File  D:\Skrypty\New_Users.txt -append
+    Write-Output "Imię i Nazwisko: $Firstname $Lastname" | Out-File  D:\new_users.txtt -append
+    Write-Output "Użytkownik: Company\$SamAccountUser" | Out-File  D:\new_users.txt -append
+    Write-Output "E-mail: $SamAccountUser@wasko.pl" | Out-File  D:\new_users.txt -append
+    Write-Output "Hasło do zmiany: $Pass" | Out-File  D:\new_users.txt -append
+    Write-Output "" | Out-File  D:\new_users.txt -append
 
 #Create Email Account - Smartermail 
 
@@ -74,7 +74,7 @@ $header = @{
  
 $SamAccount = "$SamAccountUser"
 $Password = "$Pass"
-$mx = "$SamAccountUser@owa.wasko.pl"
+$mx = "$SamAccountUser@wasko"
 $FullName = "$Firstname $Lastname"
 
 $user = @('{
