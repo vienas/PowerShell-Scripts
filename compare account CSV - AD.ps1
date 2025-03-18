@@ -26,7 +26,7 @@ $ADUsers = Get-ADUser -Filter $filter -SearchBase $OU -Properties Enabled, Displ
     }
 
 $Headers = @("SamAccountName", "Enabled")  
-$CsvData = Import-Csv -Path "d:\fonon_email\mxcoig.csv" -Header $Headers
+$CsvData = Import-Csv -Path "d:\fo\mx.csv" -Header $Headers
 
 $ComparisonResults = @()
 
