@@ -14,7 +14,7 @@ if ($Driver -eq $null) {
 
 if ($MaximoURL) {
 
-$MaximoURL = "https://helpdesk.gk.wasko.pl/maximo/webclient/login/login.jsp?welcome=true"
+$MaximoURL = "../maximo/webclient/login/login.jsp?welcome=true"
 $Username = ""
 $Password = ""
 }
