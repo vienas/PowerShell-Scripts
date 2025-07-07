@@ -6,17 +6,17 @@ Write-Host "4. ZNAJDŹ OBIEKTY WYŁĄCZONE "
 Write-Host "5. WYSZUKAJ"
 Write-Host "6. SZUKAJ WYŁĄCZONYCH UŻYTKOWNIKÓW"
 Write-Host "7. SZUKAJ UŻYTKOWNIKA PO TELEFONIE"
-Write-Host "8. SZUKAJ UŻYTKOWNIKA BEZ MANAGERA W DOMENIE EN..TE"
-Write-Host "9. SZUKAJ UŻYTKOWNIKA BEZ MANAGERA W DOMENIE WA..SKO"
+Write-Host "8. SZUKAJ UŻYTKOWNIKA BEZ MANAGERA W DOMENIE EN.."
+Write-Host "9. SZUKAJ UŻYTKOWNIKA BEZ MANAGERA W DOMENIE WA.."
 
 $case = $(Write-Host "Wybierz numer zadania: " -ForegroundColor Cyan -NoNewLine; Read-Host);
 
 $Credentials = Get-StoredCredential -Target wa
-$Credentials_Ente = Get-StoredCredential -Target ente
+$Credentials_Ente = Get-StoredCredential -Target en
 $Username = $Credentials.UserName
 $Password = $Credentials.Password
 $Server = "wa"
-$Server_Ente = "en"
+$Server_En = "en"
 $GLOBAL:Credentials = New-Object System.Management.Automation.PSCredential $Username,$Password
 
 switch ($case) {
