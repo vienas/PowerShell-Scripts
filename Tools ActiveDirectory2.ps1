@@ -31,7 +31,7 @@ switch ($case) {
 
     $countobject = (Get-ADComputer -Filter {((Enabled -eq $true) -and (LastLogonDate -lt $date))} -Properties LastLogonDate -Credential $Credentials -Server $Server -SearchBase "1" | Select-Object LastLogonDate).count
 
-    Get-ADComputer -Filter {((Enabled -eq $true) -and (LastLogonDate -lt $date))} -Properties DNSHostName, LastLogonDate, whenCreated, OperatingSystem, OperatingSystemVersion, DistinguishedName -Credential $Credentials -Server $Server -SearchBase "ou=wasko,dc=wasko,dc=pl" | Select-Object DNSHostName, LastLogonDate, whenCreated, OperatingSystem, OperatingSystemVersion, DistinguishedName | Sort-Object LastLogonDate | Out-File C:\Lista_obiektów-$countobject.txt
+    Get-ADComputer -Filter {((Enabled -eq $true) -and (LastLogonDate -lt $date))} -Properties DNSHostName, LastLogonDate, whenCreated, OperatingSystem, OperatingSystemVersion, DistinguishedName -Credential $Credentials -Server $Server -SearchBase "1" | Select-Object DNSHostName, LastLogonDate, whenCreated, OperatingSystem, OperatingSystemVersion, DistinguishedName | Sort-Object LastLogonDate | Out-File C:\Lista_obiektów-$countobject.txt
 
     Write-Output ""
 
