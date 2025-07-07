@@ -1,7 +1,6 @@
 ﻿# Sets BitLocker key (Pin) and save backup file on USB-Drive via name Estra
 # & install FortiClient, TeamViewer 
 # for estra-automotive.com
-# byWojas
 
 Add-Type -AssemblyName System.Web
 
