@@ -12,7 +12,7 @@ Write-Host "9. SZUKAJ UŻYTKOWNIKA BEZ MANAGERA W DOMENIE WA.."
 $case = $(Write-Host "Wybierz numer zadania: " -ForegroundColor Cyan -NoNewLine; Read-Host);
 
 $Credentials = Get-StoredCredential -Target wa
-$Credentials_Ente = Get-StoredCredential -Target en
+$Credentials_En = Get-StoredCredential -Target en
 $Username = $Credentials.UserName
 $Password = $Credentials.Password
 $Server = "wa"
