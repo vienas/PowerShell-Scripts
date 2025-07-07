@@ -185,7 +185,7 @@ switch ($case) {
 '9' {
     do {
         # Pobierz użytkowników bez menedżera
-        $users = Get-ADUser -LDAPFilter "(!(manager=*))" -Properties Name -Credential $Credentials -Server $Server -SearchBase "OU=wasko, DC=wasko, DC=pl"
+        $users = Get-ADUser -LDAPFilter "(!(manager=*))" -Properties Name -Credential $Credentials -Server $Server -SearchBase "1"
         
         # Wyświetl listę użytkowników
         if ($users) {
